@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { generateRecurringDates } from '../../utils/generateRecurringDates';
+import { generateRecurringDates } from '../../../src/utils/generateRecurringDates';
 
 describe('generateRecurringDates', () => {
   it('generates daily recurring dates', () => {
