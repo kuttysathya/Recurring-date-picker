@@ -1,9 +1,13 @@
-import { defineConfig } from 'vitest/config'
+import { defineConfig } from "vitest/config";
+import path from "path";
 
 export default defineConfig({
   test: {
-    include: ['tests/**/*.test.ts'], // ✅ tells Vitest where to look
-    globals: true,
-    environment: 'jsdom', // important for DOM testing
+    environment: "node",
   },
-})
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+    },
+  },
+});
