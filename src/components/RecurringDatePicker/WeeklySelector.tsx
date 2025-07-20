@@ -24,14 +24,15 @@ const WeeklySelector: React.FC<Props> = ({ selectedDays, onChange }) => {
       <div className="flex flex-wrap gap-2">
         {daysOfWeek.map(day => (
           <button
-            key={day}
-            type="button"
-            onClick={() => toggleDay(day)}
-            className={`px-3 py-1 rounded border ${
-              selectedDays.includes(day) ? "bg-blue-500 text-white" : "bg-white text-black hover:bg-blue-200"
-            }`}
+           key={day}
+           type="button"
+           onClick={() => toggleDay(day)}
+           className={`relative z-10 px-3 py-1 rounded border ${
+           selectedDays.includes(day) ? "bg-blue-500 text-white": "bg-white text-black hover:bg-blue-200"
+           }`}
+          style={{ pointerEvents: "auto" }}
           >
-            {day}
+           {day}
           </button>
         ))}
       </div>
