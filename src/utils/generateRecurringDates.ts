@@ -1,41 +1,57 @@
-export type RecurrenceType = "daily" | "weekly" | "monthly" | "yearly";
+export type RecurrenceType = "daily" | "weekly" | "monthly";
 
-interface GenerateRecurringDatesParams {
+interface Options {
   type: RecurrenceType;
   startDate: Date;
   endDate?: Date;
-  selectedDays?: string[]; // ['Mon', 'Wed']
+  selectedDays?: string[]; // ["MO", "WE", "FR"] etc.
 }
 
-export const generateRecurringDates = ({
-  type,
-  startDate,
-  endDate,
-  selectedDays = [],
-}: GenerateRecurringDatesParams): Date[] => {
-  const result: Date[] = [];
-  const current = new Date(startDate);
-  const finalDate = endDate ? new Date(endDate) : new Date(startDate);
-  finalDate.setFullYear(finalDate.getFullYear() + 1); // fallback: 1 year
+export function generateRecurringDates(options: Options): Date[] {
+  const { type, startDate, endDate, selectedDays } = options;
+  const dates: Date[] = [];
 
-  while (current <= finalDate) {
-    const day = current.getDay(); // 0 = Sun
-    const weekday = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][day];
+  let current = new Date(startDate);
 
-    if (
-      (type === "daily") ||
-      (type === "weekly" && selectedDays.includes(weekday)) ||
-      type === "monthly" ||
-      type === "yearly"
-    ) {
-      result.push(new Date(current));
+  while (!endDate || current <= endDate) {
+    if (type === "daily") {
+      dates.push(new Date(current));
+      current.setDate(current.getDate() + 1);
     }
 
-    // Move to next
-    if (type === "daily" || type === "weekly") current.setDate(current.getDate() + 1);
-    else if (type === "monthly") current.setMonth(current.getMonth() + 1);
-    else if (type === "yearly") current.setFullYear(current.getFullYear() + 1);
+    else if (type === "weekly") {
+      if (selectedDays && selectedDays.length > 0) {
+        for (let i = 0; i < 7; i++) {
+          const next = new Date(current);
+          next.setDate(current.getDate() + i);
+          const dayStr = dayToString(next.getDay()); // convert to "MO", etc.
+          if (selectedDays.includes(dayStr)) {
+            if (!endDate || next <= endDate) {
+              dates.push(new Date(next));
+            }
+          }
+        }
+        current.setDate(current.getDate() + 7);
+      } else {
+        dates.push(new Date(current));
+        current.setDate(current.getDate() + 7);
+      }
+    }
+
+    else if (type === "monthly") {
+      dates.push(new Date(current));
+      current.setMonth(current.getMonth() + 1);
+    }
+
+    // Stop loop if no endDate and dates are getting too long
+    if (!endDate && dates.length >= 100) break;
   }
 
-  return result;
-};
+  return dates;
+}
+
+// Helper to convert 0-6 to "SU"..."SA"
+function dayToString(day: number): string {
+  const map = ["SU", "MO", "TU", "WE", "TH", "FR", "SA"];
+  return map[day];
+}
