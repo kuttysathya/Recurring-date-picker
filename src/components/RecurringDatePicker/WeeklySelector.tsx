@@ -28,7 +28,7 @@ const WeeklySelector: React.FC<Props> = ({ selectedDays, onChange }) => {
             type="button"
             onClick={() => toggleDay(day)}
             className={`px-3 py-1 rounded border ${
-              selectedDays.includes(day) ? "bg-blue-500 text-white" : "bg-white text-black"
+              selectedDays.includes(day) ? "bg-blue-500 text-white" : "bg-white text-black hover:bg-blue-200"
             }`}
           >
             {day}
