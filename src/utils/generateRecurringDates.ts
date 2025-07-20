@@ -51,6 +51,6 @@ export function generateRecurringDates(options: Options): Date[] {
 }
 
 function dayToString(day: number): string {
-  const map = ["SU", "MO", "TU", "WE", "TH", "FR", "SA"];
+  const map = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   return map[day];
 }
