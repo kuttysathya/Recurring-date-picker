@@ -11,7 +11,7 @@ export function generateRecurringDates(options: Options): Date[] {
   const { type, startDate, endDate, selectedDays } = options;
   const dates: Date[] = [];
 
-  let current = new Date(startDate);
+  const current = new Date(startDate);
 
   while (!endDate || current <= endDate) {
     if (type === "daily") {
