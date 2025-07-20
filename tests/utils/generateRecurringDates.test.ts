@@ -21,13 +21,14 @@ describe("generateRecurringDates", () => {
       type: "weekly",
       startDate: new Date("2025-07-01"),
       endDate: new Date("2025-07-10"),
-      selectedDays: ["Tue", "Thu"], // Only include Tue & Thu
+      selectedDays: ["Tue", "Thu"], // July 1 (Tue), July 3 (Thu), July 8 (Tue), July 10 (Thu)
     });
 
     expect(dates.map(d => d.toISOString().slice(0, 10))).toEqual([
-      "2025-07-02", // Thu
-      "2025-07-04", // Tue
-      "2025-07-09",
+      "2025-07-01",
+      "2025-07-03",
+      "2025-07-08",
+      "2025-07-10",
     ]);
   });
 
