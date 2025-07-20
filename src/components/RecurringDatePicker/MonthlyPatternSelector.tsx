@@ -1,12 +1,3 @@
-
-// const MonthlyPatternSelector = () => {
-//   return (
-//     <div className="p-4 border border-yellow-300 rounded-lg">
-//       <h2 className="text-lg font-semibold">Monthly Pattern Selector</h2>
-//     </div>
-//   );
-// };
-
 "use client";
 
 import React, { useState } from "react";

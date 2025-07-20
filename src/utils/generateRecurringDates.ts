@@ -4,7 +4,7 @@ interface Options {
   type: RecurrenceType;
   startDate: Date;
   endDate?: Date;
-  selectedDays?: string[]; // ["MO", "WE", "FR"] etc.
+  selectedDays?: string[]; 
 }
 
 export function generateRecurringDates(options: Options): Date[] {
@@ -50,7 +50,6 @@ export function generateRecurringDates(options: Options): Date[] {
   return dates;
 }
 
-// Helper to convert 0-6 to "SU"..."SA"
 function dayToString(day: number): string {
   const map = ["SU", "MO", "TU", "WE", "TH", "FR", "SA"];
   return map[day];

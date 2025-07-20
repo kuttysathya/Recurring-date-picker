@@ -1,5 +1,3 @@
-// tests/utils/generateRecurringDates.test.ts
-
 import { describe, it, expect } from "vitest";
 import { generateRecurringDates } from "../../src/utils/generateRecurringDates";
 
@@ -37,7 +35,7 @@ describe("generateRecurringDates (based on RecurringDatePicker)", () => {
     });
 
     expect(result.length).toBe(4);
-    expect(result[0].getMonth()).toBe(0); // Jan
-    expect(result[3].getMonth()).toBe(3); // Apr
+    expect(result[0].getMonth()).toBe(0); 
+    expect(result[3].getMonth()).toBe(3); 
   });
 });
